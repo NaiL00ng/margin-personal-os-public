@@ -1,0 +1,49 @@
+# Operating systems and editors
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Local credentials and runtime data must never enter source history
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
+*.sqlite3-journal
+*.sqlite3.tmp
+*.db
+*.db-wal
+*.db-shm
+*.db-journal
+*.log
+data/
+private/
+exports/
+backups/
+margin-records-*.json
+margin-notes-*.json
+
+# Future dependencies and build caches
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+coverage/
+dist/
+.local/
+Margin.app/
+
+# prototype.html is intentionally tracked as the runnable offline artifact.

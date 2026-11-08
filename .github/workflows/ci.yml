@@ -1,0 +1,40 @@
+name: Prototype checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out this revision
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - name: Report runner runtime
+        run: node --version
+      - name: Check JavaScript syntax
+        run: |
+          node --check model.js
+          node --check effects.js
+          node --check app.js
+          node --check storage.js
+          node --check build.mjs
+          node --check preview.mjs
+      - name: Test residence and archive semantics
+        run: node --test model.test.cjs storage.test.cjs
+      - name: Test local SQLite backend and HTTP boundaries
+        run: python3 -B -m unittest discover -s backend -p 'test_*.py' -v
+      - name: Test launcher service lifecycle
+        run: python3 -B -m unittest launcher_test -v
+      - name: Rebuild the offline artifact
+        run: node build.mjs
+      - name: Ensure committed artifact matches source
+        run: git diff --exit-code -- prototype.html

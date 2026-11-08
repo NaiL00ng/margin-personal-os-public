@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4ed">
+  <title>余白 MARGIN · 把时间留给自己</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="model.js" defer></script>
+  <script src="effects.js" defer></script>
+  <script src="storage.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="masthead">
+      <a class="brand" href="#" aria-label="余白首页">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <strong>余白</strong><span>MARGIN</span>
+      </a>
+      <div class="mast-actions">
+        <span class="local-label" role="status"><i></i>只在你的浏览器</span>
+        <button id="open-data" class="quiet-button" hidden>数据与备份</button>
+        <button id="open-history" class="quiet-button">记录册 <span id="archive-count">0</span> ↗</button>
+        <button id="open-settings" class="icon-button" aria-label="外观与动效设置" title="外观与动效设置">☷</button>
+      </div>
+    </header>
+    <section class="intro">
+      <div class="intro-copy">
+        <h1>留一点时间，<span>给自己。</span></h1>
+        <p>把想到的放下来，把在意的留下来。</p>
+      </div>
+      <div class="intro-aside">
+        <div class="motion-row">
+          <span class="motion-label">动效</span>
+          <div id="motion-controls" class="segmented" aria-label="动效强度">
+            <button data-motion="full">灵动</button>
+            <button data-motion="reduced">轻柔</button>
+            <button data-motion="off">关闭</button>
+          </div>
+        </div>
+        <span id="motion-hint" class="micro">一点随机的纸感，一切由你掌控。</span>
+      </div>
+    </section>
+    <main class="workspace">
+      <section class="board-section" aria-label="艾森豪威尔矩阵">
+        <div class="board-topline">
+          <div class="board-heading"><span class="board-name">你的四象限</span><span class="board-hint">拖动卡片，自由摆放</span></div>
+          <div class="board-tools">
+            <button id="arrange-cards" class="text-button" title="将象限内的便利贴重新排列">整理位置</button>
+            <button id="color-settings" class="text-button">◒ 调色</button>
+          </div>
+        </div>
+        <div class="matrix-wrap">
+          <div class="axis-y"><span>重要</span><span>不重要</span></div>
+          <div class="axis-x"><span>不紧急</span><span>紧急 <i aria-hidden="true">→</i></span></div>
+          <div id="matrix" class="matrix">
+            <section class="quadrant q2" data-drop="q2" aria-label="重要不紧急">
+              <header><div><span class="quadrant-code">II</span><h2>留给自己</h2></div><span class="quadrant-caption">重要 · 不紧急</span></header>
+              <div class="card-list" id="zone-q2"></div>
+              <div class="empty-quadrant"><span>✳</span>为长远在意的事留一个位置</div>
+              <span class="zone-count" id="count-q2">00</span>
+            </section>
+            <section class="quadrant q1" data-drop="q1" aria-label="重要且紧急">
+              <header><div><span class="quadrant-code">I</span><h2>现在着手</h2></div><span class="quadrant-caption">重要 · 紧急</span></header>
+              <div class="card-list" id="zone-q1"></div>
+              <div class="empty-quadrant"><span>↘</span>先做眼前真正重要的事</div>
+              <span class="zone-count" id="count-q1">00</span>
+            </section>
+            <section class="quadrant q4" data-drop="q4" aria-label="不重要不紧急">
+              <header><div><span class="quadrant-code">IV</span><h2>暂且放下</h2></div><span class="quadrant-caption">不重要 · 不紧急</span></header>
+              <div class="card-list" id="zone-q4"></div>
+              <div class="empty-quadrant"><span>∿</span>不是每件事都需要现在发生</div>
+              <span class="zone-count" id="count-q4">00</span>
+            </section>
+            <section class="quadrant q3" data-drop="q3" aria-label="不重要但紧急">
+              <header><div><span class="quadrant-code">III</span><h2>安排妥当</h2></div><span class="quadrant-caption">不重要 · 紧急</span></header>
+              <div class="card-list" id="zone-q3"></div>
+              <div class="empty-quadrant"><span>↗</span>可以简化，也可以交给别人</div>
+              <span class="zone-count" id="count-q3">00</span>
+            </section>
+          </div>
+        </div>
+        <div class="board-footer"><span><i class="live-dot"></i><span id="board-summary">准备好，开始吧</span></span><button id="timer-help" class="text-button">驻留 ≠ 专注 ⓘ</button></div>
+      </section>
+      <aside class="sidebar" aria-label="便利贴工作台">
+        <section class="prep-section">
+          <div class="side-label"><span>工作台</span><small>从一个念头开始</small></div>
+          <button id="new-card" class="new-button"><span>新建事项</span><span class="keycap">＋</span></button>
+          <div id="preparation" class="preparation" data-drop="prep">
+            <div class="prep-heading"><span>准备区 <small>暂停计时</small></span><span id="prep-count">00</span></div>
+            <div class="prep-list" id="zone-prep"></div>
+            <div class="prep-empty"><span class="outline-note">＋</span><p>先放下来，不急着决定</p><small>准备好后，拖进一个象限</small></div>
+          </div>
+        </section>
+        <section class="actions-section" aria-label="拖入以调整或完成">
+          <div class="section-label">给这件事一个去处</div>
+          <div class="action-drop edit-drop" data-drop="edit">
+            <button id="adjust-action" class="action-button"><span class="action-icon">↺</span><span><strong>调整</strong><small>改一改，回到准备区</small></span><span class="action-arrow">↗</span></button>
+          </div>
+          <div class="action-drop complete-drop" data-drop="complete">
+            <button id="complete-action" class="action-button"><span class="action-icon">✓</span><span><strong>完成</strong><small>收好这一步，留下过程</small></span><span class="action-arrow">↗</span></button>
+          </div>
+        </section>
+        <div class="void-drop" data-drop="void">
+          <div class="void-progress"></div>
+          <button id="void-action"><span class="void-symbol black-hole-icon" aria-hidden="true"></span><span><strong>Void</strong><small id="void-instruction">拖入，停留 1.2 秒后松手</small></span><span class="void-dot">↘</span></button>
+          <div class="void-caption">放下有痕迹，也始终可以回来。</div>
+        </div>
+        <p class="sidebar-footnote">点开卡片，查看详情与驻留记录。</p>
+      </aside>
+    </main>
+    <footer class="page-footer"><span>把空间留给真正重要的事。</span><span>本地交互原型</span><button id="help-button" class="text-button">使用说明 ↗</button></footer>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="dialog-root"></div>
+</body>
+</html>
